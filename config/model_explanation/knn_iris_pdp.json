@@ -1,0 +1,16 @@
+{
+	"train_type": "KNN_IRIS",
+	"explain_type": "PDP",
+	"data": false,
+	"train":{
+		"name": "knn_iris_classifier",
+		"model_path": "src/data/model",
+		"log_path": "src/data/log"
+	},
+	"explain":{
+		"name": "knn_iris_classifier_lime_explanation",
+		"model_path": "src/data/model/knn_iris_classifier.sav",
+		"out_path": "src/data/out",
+		"num_sample": 1
+	}
+}

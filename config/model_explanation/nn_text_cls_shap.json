@@ -1,0 +1,19 @@
+{
+	"train_type": "NN_TEXT_CLASSIFIER",
+	"explain_type": "SHAP",
+	"data": false,
+	"train":{
+		"name": "nn_text_classifier",
+		"epoch": 10,
+		"lr": 5,
+		"batch_size": 64,
+		"model_path": "src/data/model",
+		"log_path": "src/data/log"
+	},
+	"explain":{
+		"name": "nn_text_classifier_shap_explanation",
+		"model_path": "src/data/model/nn_text_classifier.pt",
+		"out_path": "src/data/out",
+		"num_sample": 5
+	}
+}
