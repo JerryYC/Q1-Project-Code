@@ -97,17 +97,17 @@ def create_model(dataset):
 def identify_causal_effect(model):
     identified_estimand = model.identify_effect(proceed_when_unidentifiable=True)
     print(identified_estimand)
-    return
+    return identified_estimand
 
 ############################################## ESTIMATING CAUSAL EFFECT ###############################################
-def estimate_effect(model):
+def estimate_effect(model, identified_estimand):
     estimate = model.estimate_effect(identified_estimand,
                                  method_name="backdoor.propensity_score_stratification",target_units="ate")
     print(estimate)
-    return
+    return estimate
 
 ############################################## REFUTING RANDOM COMMON CAUSE ###############################################
-def refute_random_common_cause(model):
+def refute_random_common_cause(model, identified_estimand, estimate):
     refute1_results=model.refute_estimate(identified_estimand, estimate,
         method_name="random_common_cause")
     print(refute1_results)
@@ -115,7 +115,7 @@ def refute_random_common_cause(model):
 
 ############################################## REFUTING PLACEBO TREATMENT ###############################################
 
-def refute_placebo_treatment(model):
+def refute_placebo_treatment(model, identified_estimand, estimate):
     refute2_results=model.refute_estimate(identified_estimand, estimate,
         method_name="placebo_treatment_refuter")
     print(refute2_results)
@@ -123,7 +123,7 @@ def refute_placebo_treatment(model):
 
 ############################################## REFUTING DATA SUBSET ###############################################
 
-def refute_data_subset(model):
+def refute_data_subset(model, identified_estimand, estimate):
     refute3_results=model.refute_estimate(identified_estimand, estimate,
         method_name="data_subset_refuter")
     print(refute3_results)
@@ -144,12 +144,12 @@ def main(config):
     logging.config.dictConfig(DEFAULT_LOGGING)
     dataset = feature_engineering()
     model = create_model(dataset)
-    identify_causal_effect(model)
-    estimate_effect(model)
+    identified_estimand = identify_causal_effect(model)
+    estimate = estimate_effect(model, identified_estimand)
     if config["refute"]:
-        refute_random_common_cause(model)
-        refute_placebo_treatment(model)
-        refute_data_subset(model)
+        refute_random_common_cause(model, identified_estimand, estimate)
+        refute_placebo_treatment(model, identified_estimand, estimate)
+        refute_data_subset(model, identified_estimand, estimate)
 
 if __name__=="__main__":
     main()

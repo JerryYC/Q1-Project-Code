@@ -85,6 +85,7 @@ def feature_engineering():
        'infant_id', 'dlivord_min', 'dtotord_min', 'bord',
        'brstate_reg', 'stoccfipb_reg', 'mplbir_reg','wt','treatment','outcome']
     df = pd.DataFrame(columns=cols,data=data)
+    df['treatment'] = df['treatment'] > 0 
     return df
 
 ############################################## CREATING CAUSAL MODEL ###############################################
@@ -103,32 +104,30 @@ def create_model(df):
 def identify_causal_effect(model):
     identified_estimand = model.identify_effect(proceed_when_unidentifiable=True)
     print(identified_estimand)
-    return
+    return identified_estimand
 
 ############################################## ESTIMATING CAUSAL EFFECT ###############################################
 
-def estimate_effect_linear_regression(model):
+def estimate_effect_linear_regression(model, identified_estimand):
     estimate = model.estimate_effect(identified_estimand,
         method_name="backdoor.linear_regression", test_significance=True)
 
     print(estimate)
-    print("ATE", np.mean(data_1["outcome"])- np.mean(data_0["outcome"]))
     print("Causal Estimate is " + str(estimate.value))
-    return
+    return estimate
 
 
-def estimate_effect_propensity_score(model):
+def estimate_effect_propensity_score(model, identified_estimand):
     estimate = model.estimate_effect(identified_estimand,
         method_name="backdoor.propensity_score_matching")
 
     print("Causal Estimate is " + str(estimate.value))
 
-    print("ATE", np.mean(data_1["outcome"])- np.mean(data_0["outcome"]))
-    return
+    return estimate
 
 ############################################## REFUTING RANDOM COMMON CAUSE ###############################################
 
-def refute_random_common_cause(model):
+def refute_random_common_cause(model, identified_estimand, estimate):
     refute1_results=model.refute_estimate(identified_estimand, estimate,
         method_name="random_common_cause")
     print(refute1_results)
@@ -136,7 +135,7 @@ def refute_random_common_cause(model):
 
 ############################################## REFUTING PLACEBO TREATMENT ###############################################
 
-def refute_placebo_treatment(model):
+def refute_placebo_treatment(model, identified_estimand, estimate):
     refute2_results=model.refute_estimate(identified_estimand, estimate,
         method_name="placebo_treatment_refuter")
     print(refute2_results)
@@ -145,7 +144,7 @@ def refute_placebo_treatment(model):
 ############################################## REFUTING DATA SUBSET ###############################################
 
 
-def refute_data_subset(model):
+def refute_data_subset(model, identified_estimand, estimate):
     refute3_results=model.refute_estimate(identified_estimand, estimate,
         method_name="data_subset_refuter")
     print(refute3_results)
@@ -168,13 +167,13 @@ def main(config):
     data = feature_engineering()
     print("building model")
     model = create_model(data)
-    identify_causal_effect(model)
-    estimate_effect_linear_regression(model)
-    estimate_effect_propensity_score(model)
+    identified_estimand = identify_causal_effect(model)
+    estimate_effect_linear_regression(model, identified_estimand)
+    estimate = estimate_effect_propensity_score(model, identified_estimand)
     if config["refute"]:
-      refute_random_common_cause(model)
-      refute_placebo_treatment(model)
-      refute_data_subset(model)
+        refute_random_common_cause(model, identified_estimand, estimate)
+        refute_placebo_treatment(model, identified_estimand, estimate)
+        refute_data_subset(model, identified_estimand, estimate)
 
 
 if __name__=="__main__":
