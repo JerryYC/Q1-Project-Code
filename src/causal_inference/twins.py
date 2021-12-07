@@ -1,5 +1,4 @@
 import logging.config
-
 # Disabling warnings output
 import warnings
 from sklearn.exceptions import DataConversionWarning, ConvergenceWarning
@@ -151,7 +150,6 @@ def refute_data_subset(model):
         method_name="data_subset_refuter")
     print(refute3_results)
     return
-
 
 
 def main(config):
