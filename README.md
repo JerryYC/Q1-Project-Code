@@ -1,10 +1,14 @@
 # Causal Inference and Explainable AI
 
-This is a repository ... TODO (Short introduction)
+This is a repository that contains code for DSC180A section B06's Q1 Project: Causal Inference and Explainable AI. We conducted experiments for causal inference using the DoWhy library on two examples: hotel cancellation and mortality of twins. In the hotel cancellation example, we tried to make causal inference on the effect of having a different room assigned before check in on booking cancellation. In the mortality of twins example, we tried to make causal inference on the effect of weights on the mortality of twins. 
+
+We also conducted experiments for Explainable AI using LIME, SHAP, and the Partial Dependence Plot(PDP) on two machine learning models: Text Classification Neural Network and K-Nearest-Neighbor Model. In this part, we tried to generate global explanations for the K-Nearest-Neighbor Model using PDP and generate local explanations for both machine learning model using LIME and SHAP.
 
 ## Authors
 - [Jerry (Yung-Chieh) Chan](https://github.com/JerryYC)
-- TODO
+- Apoorv Pochiraju
+- Zhendong Wang
+- Yujie Zhang
 
 
 ## Retrieving the data for Causal Inference:
