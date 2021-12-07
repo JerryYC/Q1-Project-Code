@@ -1,4 +1,4 @@
 {
-	"type": "twin",
-	"refute": false
+	"type": "twins",
+	"refute": true
 }

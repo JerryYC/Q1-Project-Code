@@ -164,7 +164,9 @@ def main(config):
     }
     logging.config.dictConfig(DEFAULT_LOGGING)
     warnings.filterwarnings("ignore")
+    print("loading data")
     data = feature_engineering()
+    print("building model")
     model = create_model(data)
     identify_causal_effect(model)
     estimate_effect_linear_regression(model)
