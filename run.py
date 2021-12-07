@@ -76,4 +76,7 @@ if __name__ == '__main__':
     # run via:
     # python main.py data features model
     target = sys.argv[1]
-    main(target)
+    if target != "test" and len(sys.argv) < 3:
+        print("please specifiy config path")
+    else:
+        main(target)
