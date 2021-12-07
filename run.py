@@ -30,14 +30,18 @@ def main(target):
         get_data("test")
 
         ### XAI Test
-        with open('config/test/model_explanation.json') as fh:
+        with open('config/test/XAI_test.json') as fh:
             test_XAI_cfg = json.load(fh)
+        train_model(test_XAI_cfg)
         explain_model(test_XAI_cfg)
 
         ### CI
-        with open('config/test/causal_inference.json') as fh:
+        with open('config/test/CI_test.json') as fh:
             test_CI_cfg = json.load(fh)
-        generate_analysis(test_CI_cfg)
+        if CI_cfg["type"] == "hotel":
+            hotel_cancellation.main(test_CI_cfg)
+        if CI_cfg["type"] == "twins":
+            twins.main(test_CI_cfg)
 
     if 'XAI' == target:
         print("Running model explanation pipeline")

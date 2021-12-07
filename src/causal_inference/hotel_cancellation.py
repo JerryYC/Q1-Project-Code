@@ -88,8 +88,8 @@ def create_model(dataset):
     model= dowhy.CausalModel(
         data = dataset,
         graph=causal_graph.replace("\n", " "),
-        treatment='edu',
-        outcome='personal_loan')
+        treatment='different_room_assigned',
+        outcome='is_canceled')
     return model
 
 ############################################## IDENITFYING CAUSAL EFFECT ###############################################
