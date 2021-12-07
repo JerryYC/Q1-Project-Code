@@ -8,6 +8,7 @@ sys.path.insert(0, 'src')
 
 from utils import setup_env, get_data
 from model_explanation import train_model, explain_model
+from causal_inference import hotel_cancellation, twins
 # from causal_inference import generate_analysis
 
 
@@ -57,9 +58,13 @@ def main(target):
         print("Running causal inference explanation pipeline")
         get_data("CI")
 
-        with open('config/causal_inference.json') as fh:
+        with open(sys.argv[2])  as fh:
             CI_cfg = json.load(fh)
-        generate_analysis(CI_cfg)
+
+        if CI_cfg["type"] == "hotel":
+            hotel_cancellation.main(CI_cfg)
+        if CI_cfg["type"] == "twins":
+            twins.main(CI_cfg)
 
     return
 

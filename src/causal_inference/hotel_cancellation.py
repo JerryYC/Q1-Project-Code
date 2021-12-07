@@ -1,14 +1,13 @@
 # Setup
 import logging.config
 
-logging.config.dictConfig(DEFAULT_LOGGING)
 # Disabling warnings output
 import warnings
 from sklearn.exceptions import DataConversionWarning, ConvergenceWarning
 # warnings.filterwarnings(action='ignore', category=DataConversionWarning)
 # warnings.filterwarnings(action='ignore', category=ConvergenceWarning)
 # warnings.filterwarnings(action='ignore', category=UserWarning)
-warnings.filterwarnings("ignore")
+
 
 import dowhy
 import pandas as pd
@@ -131,7 +130,8 @@ def refute_data_subset(model):
     return
 
 
-def main():
+def main(config):
+    warnings.filterwarnings("ignore")
     DEFAULT_LOGGING = {
         'version': 1,
         'disable_existing_loggers': False,
@@ -141,13 +141,15 @@ def main():
             },
         }
     }
+    logging.config.dictConfig(DEFAULT_LOGGING)
     dataset = feature_engineering()
     model = create_model(dataset)
     identify_causal_effect(model)
     estimate_effect(model)
-    refute_random_common_cause(model)
-    refute_placebo_treatment(model)
-    refute_data_subset(model)
+    if config["refute"]:
+        refute_random_common_cause(model)
+        refute_placebo_treatment(model)
+        refute_data_subset(model)
 
 if __name__=="__main__":
     main()
