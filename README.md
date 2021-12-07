@@ -40,10 +40,12 @@ The treatment data contains weight in grams of both the twins: https://raw.githu
  target | config | experiment |
 | :---: | :---: | :---: |
 | test | None | Run XAI on a light model and CI on a simple dataset to make sure pipeline is working |
-| XAI | config/model＿explanation/nn_text_cls_lime.json | Train and explain text classification neural network with LIME |
-| XAI | config/model＿explanation/nn_text_cls_shap.json | Train and explain text classification neural network with SHAP |
-| XAI | config/model＿explanation/knn_iris_lime.json | Train and explain classification KNN with LIME |
-| XAI | config/model＿explanation/knn_iris_pdp.json | Train and explain classification KNN with PDP |
+| XAI | config/model_explanation/nn_text_cls_lime.json | Train and explain text classification neural network with LIME |
+| XAI | config/model_explanation/nn_text_cls_shap.json | Train and explain text classification neural network with SHAP |
+| XAI | config/model_explanation/knn_iris_lime.json | Train and explain classification KNN with LIME |
+| XAI | config/model_explanation/knn_iris_pdp.json | Train and explain classification KNN with PDP |
+| CI | config/causal_inference/hotel.json | Build a causal inference model and estimate the effect of treatement on hotel cancellation dataset and run refute |
+| CI | config/causal_inference/twins.json | Build a causal inference model and estimate the effect of treatement on twin dataset and run refute  |
 
 ## Reference
 
