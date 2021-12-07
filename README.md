@@ -16,7 +16,17 @@ We also conducted experiments for Explainable AI using LIME, SHAP, and the Parti
 ## Retrieving the data for Causal Inference:
 If you plan to run the casaul inference pipeline, please follow those steps to retrieve the data:
 
-* TODO
+* Hotel Cancellation: 
+
+https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-11/hotels.csv 
+
+* Twins: 
+
+The covariates data has 46 features: https://raw.githubusercontent.com/AMLab-Amsterdam/CEVAE/master/datasets/TWINS/twin_pairs_X_3years_samesex.csv
+
+The outcome data contains mortality of the lighter and heavier twin: https://raw.githubusercontent.com/AMLab-Amsterdam/CEVAE/master/datasets/TWINS/twin_pairs_Y_3years_samesex.csv
+
+The treatment data contains weight in grams of both the twins: https://raw.githubusercontent.com/AMLab-Amsterdam/CEVAE/master/datasets/TWINS/twin_pairs_T_3years_samesex.csv
 
 
 ## Running the project
