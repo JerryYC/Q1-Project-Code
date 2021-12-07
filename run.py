@@ -38,9 +38,9 @@ def main(target):
         ### CI
         with open('config/test/CI_test.json') as fh:
             test_CI_cfg = json.load(fh)
-        if CI_cfg["type"] == "hotel":
+        if test_CI_cfg["type"] == "hotel":
             hotel_cancellation.main(test_CI_cfg)
-        if CI_cfg["type"] == "twins":
+        if test_CI_cfg["type"] == "twins":
             twins.main(test_CI_cfg)
 
     if 'XAI' == target:
