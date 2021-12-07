@@ -13,6 +13,9 @@ We also conducted experiments for Explainable AI using LIME, SHAP, and the Parti
 - Yujie Zhang
 
 
+## Docker Image:
+"dockerhub-id" : zhw005/dsc180a-project
+
 ## Retrieving the data for Causal Inference:
 If you plan to run the casaul inference pipeline, please follow those steps to retrieve the data:
 
